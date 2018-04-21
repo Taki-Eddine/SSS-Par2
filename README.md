@@ -2,7 +2,8 @@
 Crypto Chall TimCTF
 
 
-This challenge is the seconde SSS (Shamir Secret Sharing) challenge put on timctf (BTW big thumbs up go to the organizers ^^. You can find here the different files provided with the task attached here
+This challenge is the seconde SSS (Shamir Secret Sharing) challenge put on timctf [BTW thanks to go to the organizers ^^]
+You can find attached here the different files provided with the task.
 
 
 They used a 12° degree polynomiall, means we need 13 points to get the secret! but they provided only 10 points! (Here you start thinking of some bruteforcing)
