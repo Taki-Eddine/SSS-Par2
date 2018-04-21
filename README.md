@@ -33,6 +33,5 @@ I used an online website to calculate p0 and got S from p0(0) and we have the fi
 Using the same methode above we can get the other chunks (cause Si == pi(0)! makes sense?)
 
 After calculating p1(0), p2(0) ans p3(0) we get our flag = 'timctf{d0_NOt_R3inV3nT_CrYpt0_Pl34sE}'
-##############################################################################################################################
+
 AND DO NOT REINVENT CRYPTO PLZ! (unless you know what you are doing :p )
----------------------------------------------------------------------------
