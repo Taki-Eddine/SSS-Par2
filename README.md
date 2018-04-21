@@ -14,7 +14,7 @@ In the description they say it was a personnal implementation so i digged  'sss.
 
 What we exploit: the distance between two polynomials will be the same for all points! So knowing P(x), Q(x) and P(y) you can get Q(y)! because P(x) - Q(x) == P(y) - Q(y)
 
-Well for the chunk0 polynomial we allready have the 10 given points associated with {1,2,5,6,7,11,12,14,15,16} 
+Well for the chunk0 polynomial we already have the 10 given points associated with {1,2,5,6,7,11,12,14,15,16} 
 [see 'shares.txt' file] 
 
 
