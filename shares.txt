@@ -1,0 +1,55 @@
+{'chunk_1': [{'y': 7534756766114272409848924L, 'x': 1}, {'y': 66978181006191079297279262218128076L, 'x': 9}, {'y': 678799734583606628110680296067088964L, 'x': 11}, {'y': 225588394289481618750334040029653733L, 'x': 10}, {'y': 6749232312651457325446131407191L, 'x': 4}, {'y': 649395790141148903324419632227569L, 'x': 6}, {'y': 11158497458197532276588229083780014361L, 'x': 14}, {'y': 3546907814927828372720325053L, 'x': 2}, {'y': 279176970217216975928973607924L, 'x': 3}, {'y': 52947118700717502446049500473821681859L, 'x': 16}], 'chunk_0': [{'y': 3547087743966283680068135913L, 'x': 2}, {'y': 1860267866884037681999467733513646923L, 'x': 12}, {'y': 3756478321347707411745123850684568L, 'x': 7}, {'y': 649395790321077941779726980038429L, 'x': 6}, {'y': 7714685804569579757659784L, 'x': 1}, {'y': 52947118700717682375087955781169492719L, 'x': 16}, {'y': 24931594865021853504967357789546438568L, 'x': 15}, {'y': 11158497458197712205626684391127825221L, 'x': 14}, {'y': 82516271130460525542769472212368L, 'x': 5}, {'y': 678799734583786557149135603414899824L, 'x': 11}], 'chunk_3': [{'y': 678799734583236817869360194048995726L, 'x': 11}, {'y': 7164946524794170391755686L, 'x': 1}, {'y': 11158497458197162466346908981761921123L, 'x': 14}, {'y': 24931594865021303765687582380180534470L, 'x': 15}, {'y': 66978181005821269055959160200034838L, 'x': 9}, {'y': 82516270580721245767360106308270L, 'x': 5}, {'y': 1860267866883487942719692324147742825L, 'x': 12}, {'y': 3756478320797968131969714484780470L, 'x': 7}, {'y': 649395789771338662004317614134331L, 'x': 6}, {'y': 52947118700717132635808180371803588621L, 'x': 16}], 'chunk_2': [{'y': 3756478321318984813406587251755160L, 'x': 7}, {'y': 66978181006342285737396032967009528L, 'x': 9}, {'y': 279177121423657092699722489376L, 'x': 3}, {'y': 3547059021367945143469206505L, 'x': 2}, {'y': 6749232463857897442216880288643L, 'x': 4}, {'y': 17310948777803134508150845025160871L, 'x': 8}, {'y': 4711969465268398701166409885324942016L, 'x': 13}, {'y': 649395790292355343441190381109021L, 'x': 6}, {'y': 11158497458197683483028345854528895813L, 'x': 14}, {'y': 1860267866884008959401129196914717515L, 'x': 12}]}
+
+
+p0_known = {2,12,7,6,1,16,15,14,5,11,(4),(9),(10)}
+
+S0 - S1 = 179929038455307347810860L
+
+p0(4) = 6749232492580495780753479218051L
+p0(9) = 66978181006371008335734569565938936L
+p0(10) = 225588394289661547788789347377464593L
+timctf{d0_NOt_R3inV3nT_CrYpt0_Pl34sE}
+
+
+
+```
+This challenge is the seconde SSS (Shamir Secret Sharing) challenge put on timctf (BTW big thumbs up go to the organizers ^^. You can find here the different files provided with the task:
+https://drive.google.com/drive/folders/1m4HsyklKYfo7cgU4BMBEaJpjUHDVk0eL?usp=sharing
+```
+
+```
+They used a 12th degree polynomail, means we need 13 points to get the secret! but they provided only 10 points! (Here you start thinking of some bruteforcing)
+
+In the description they say it was a personnal implementation so i digged  'sss.py' and realized that they were splitting the flag into 4 chunks, then encrypted each one alone! seems allright already!  But here was the vulnerability: they used the same Lagrange Polynomial coefficients (except for the secret S obviously).
+
+
+```
+
+```
+Here what we exploit: the distance between two polynomials will be the same for all points! So knowing P(x), Q(x) and P(y) you can get Q(y)!
+
+well for the chunk0 polynomial we allready have the points associated with {1,2,6,7,12,16,15,14,5,11} [see 'chunks' file]
+```
+
+```
+Let p0,p1,p2,p3 the four polynomials associated respectively with chunk0, chunk1, chunk2 and chunk3
+
+```
+
+```
+We know p0(1) and p1(1) and p1(4) then p0(1) - p1(1) == p0(4) - p1(4) implies p0(4) == p1(4) + (p0(1) - p1(1))
+Yayyy another point for p0, still we have to gain knowledge on  2 other points.
+Using the same methode with other points available in the chunks we can get p0(9) ans p0(10) => we have now 13 points
+```
+
+```
+I used an online website to get the S from p0 and we have the first chunk : 'timctf{d0_'
+
+```
+
+```
+Using the same methode above we can get the other chunks (cause S == p0(0)! right?)
+After calculating p1(0), p2(0) ans p3(0) we get our flag = 'timctf{d0_NOt_R3inV3nT_CrYpt0_Pl34sE}'
+```
+
+AND DO NOT REINVENT CRYPTO PLZ! (unless you know what you are doing :p )
